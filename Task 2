@@ -1,0 +1,7 @@
+//2
+//Найдите производителей принтеров. Вывести: maker
+
+SELECT maker
+FROM Product
+WHERE type IN ('Printer')
+GROUP BY maker
