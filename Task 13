@@ -1,0 +1,6 @@
+//13
+//Найдите среднюю скорость ПК, выпущенных производителем A.
+
+SELECT DISTINCT AVG(speed) AS Avg_speed
+FROM Product LEFT JOIN PC ON PC.model = Product.model
+WHERE maker = 'A'
