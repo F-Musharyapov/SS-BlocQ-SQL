@@ -1,0 +1,27 @@
+//Task 64
+//Используя таблицы Income и Outcome, для каждого пункта приема определить дни, когда был приход,
+//но не было расхода и наоборот.
+//Вывод: пункт, дата, тип операции (inc/out), денежная сумма за день.
+
+WITH Table1 AS (
+    SELECT Income.point AS point, Income.date AS date, type= 'inc', inc=sum(inc)
+    FROM Income LEFT JOIN Outcome ON Outcome.point = Income.point AND Outcome.date = Income.date
+    WHERE Outcome.date IS NULL
+    GROUP BY Income.point, Income.date),
+
+Table2 AS (
+    SELECT Outcome.point AS point, Outcome.date AS date, type= 'out', out=sum(out)
+    FROM Outcome LEFT JOIN Income ON Income.point = Outcome.point AND Income.date = Outcome.date
+    WHERE Income.date IS NULL
+    GROUP BY Outcome.point, Outcome.date),
+
+Table3 AS (
+    SELECT *
+    FROM Table2
+    UNION
+    SELECT *
+    FROM Table1
+    )
+
+SELECT *
+FROM Table3

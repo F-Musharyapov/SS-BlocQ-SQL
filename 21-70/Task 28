@@ -1,0 +1,10 @@
+//Task 28
+//Используя таблицу Product, определить количество производителей, выпускающих по одной модели.
+
+SELECT COUNT(*) AS qty
+FROM (
+    SELECT maker
+   FROM Product
+   GROUP BY maker
+   HAVING COUNT(model) = 1
+)Table1

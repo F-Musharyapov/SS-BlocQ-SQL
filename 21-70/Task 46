@@ -1,0 +1,8 @@
+//Task 46
+//Для каждого корабля, участвовавшего в сражении при Гвадалканале (Guadalcanal), вывести название, водоизмещение и число орудий.
+
+SELECT DISTINCT Outcomes.ship, Classes.displacement, Classes.numGuns
+FROM Outcomes
+LEFT JOIN Ships ON Outcomes.ship=Ships.name
+LEFT JOIN Classes ON Classes.class=Ships.class or Outcomes.ship = Classes.class
+WHERE battle = 'Guadalcanal'

@@ -1,0 +1,21 @@
+//Task 68
+//Найти количество маршрутов, которые обслуживаются наибольшим числом рейсов.
+//Замечания.
+//1) A - B и B - A считать ОДНИМ И ТЕМ ЖЕ маршрутом.
+//2) Использовать только таблицу Trip
+
+WITH Table1_count  AS (
+    SELECT COUNT(trip_no) AS count_result
+    FROM (
+        SELECT
+            CASE
+                WHEN town_from> town_to THEN town_from+town_to
+                ELSE town_to+town_from
+            END trip_name, trip_no FROM Trip ) a
+        GROUP by trip_name )
+
+SELECT COUNT(count_result) AS Qty
+FROM Table1_count
+WHERE count_result IN (
+    SELECT MAX(count_result)
+    FROM Table1_count)

@@ -1,0 +1,8 @@
+//Task 21
+//Найдите производителей, выпускающих по меньшей мере три различных модели ПК.
+//Вывести: Maker, число моделей ПК.
+
+SELECT maker, MAX(price)
+FROM Product INNER JOIN PC ON PC.model = Product.model
+WHERE type = 'pc'
+GROUP BY product.maker

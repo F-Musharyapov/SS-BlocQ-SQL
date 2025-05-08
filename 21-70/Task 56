@@ -1,0 +1,13 @@
+//Task 56
+//Для каждого класса определите число кораблей этого класса, потопленных в сражениях.
+//Вывести: класс и число потопленных кораблей.
+
+SELECT Classes.class, COUNT(table1.class) AS count
+FROM Classes LEFT JOIN (
+    SELECT Classes.class
+    FROM Outcomes
+    LEFT JOIN Ships on Ships.name = Outcomes.ship
+    LEFT JOIN Classes on Classes.class = Ships.class or Classes.class = Outcomes.ship
+    WHERE result = 'sunk'
+    ) table1 on table1.class = Classes.class
+GROUP BY Classes.class

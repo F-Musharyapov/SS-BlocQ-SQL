@@ -1,0 +1,18 @@
+//Task 39
+//Найдите корабли, `сохранившиеся для будущих сражений`;
+//т.е. выведенные из строя в одной битве (damaged), они участвовали в другой, произошедшей позже.
+
+SELECT distinct ship
+FROM Outcomes Outcomes1 LEFT JOIN Battles Battles1 ON name = battle
+WHERE ship in (SELECT ship
+    FROM Outcomes
+    WHERE result = 'damaged')
+AND ship IN (SELECT ship
+    FROM Outcomes
+    GROUP BY ship
+    HAVING COUNT(ship) > 1)
+AND result = 'damaged'
+AND EXISTS (SELECT *
+    FROM Outcomes Outcomes2 LEFT JOIN Battles Battles2 ON name = battle
+    WHERE Outcomes1.ship = Outcomes2.ship
+    AND Battles1.date < Battles2.date)

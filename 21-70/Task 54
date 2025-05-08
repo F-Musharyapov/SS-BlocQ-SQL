@@ -1,0 +1,11 @@
+//Task 54
+//С точностью до 2-х десятичных знаков определите среднее число орудий всех линейных кораблей (учесть корабли из таблицы Outcomes).
+
+SELECT CAST(AVG(numGuns*1.0) AS NUMERIC(6,2))
+FROM (
+    SELECT name,numGuns
+    FROM Ships LEFT JOIN Classes ON Classes.class = Ships.class
+    WHERE type = 'bb'
+    UNION
+    SELECT ship,numGuns FROM Outcomes LEFT JOIN Classes ON Outcomes.ship = Classes.class
+    WHERE type = 'bb') Table1
