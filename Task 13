@@ -1,4 +1,4 @@
-//13
+//Task 13
 //Найдите среднюю скорость ПК, выпущенных производителем A.
 
 SELECT DISTINCT AVG(speed) AS Avg_speed
