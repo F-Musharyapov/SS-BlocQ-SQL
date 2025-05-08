@@ -1,0 +1,9 @@
+//Task 8
+//Найдите производителя, выпускающего ПК, но не ПК-блокноты.
+
+SELECT DISTINCT maker
+FROM Product AS PC_Product
+WHERE type = 'PC' AND NOT EXISTS
+      (SELECT maker
+      FROM Product
+      WHERE type = 'Laptop' AND maker = PC_Product.maker)
