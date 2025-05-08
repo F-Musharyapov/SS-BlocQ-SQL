@@ -1,0 +1,10 @@
+//Task 38
+//Найдите страны, имевшие когда-либо классы обычных боевых кораблей ('bb')
+и имевшие когда-либо классы крейсеров ('bc').
+
+SELECT DISTINCT country
+FROM Classes AS Country_classes
+WHERE type = 'bb' AND EXISTS
+    (SELECT country
+    FROM Classes
+    WHERE type = 'bc' AND country = Country_classes.country)

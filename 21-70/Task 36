@@ -1,0 +1,10 @@
+//Task 36
+//Перечислите названия головных кораблей, имеющихся в базе данных (учесть корабли в Outcomes).
+
+SELECT name
+FROM Ships
+WHERE class = name
+UNION
+SELECT ship as name
+FROM Classes,Outcomes
+WHERE Classes.class = Outcomes.ship

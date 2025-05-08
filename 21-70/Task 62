@@ -1,0 +1,22 @@
+//Task 62
+//Посчитать остаток денежных средств на всех пунктах приема на начало дня 15/04/2001
+//для базы данных с отчетностью не чаще одного раза в день.
+
+SELECT SUM(sum_i_o)
+FROM (
+    SELECT table_inc.point, sum_inc-(
+        CASE
+            WHEN sum_out is NULL
+            THEN 0 ELSE sum_out
+        END) AS sum_i_o
+    FROM (
+        SELECT point, SUM(inc) AS sum_inc
+        FROM Income_o
+        WHERE date < '2001-04-15'
+        GROUP BY point) as table_inc
+    LEFT JOIN (
+        SELECT point, SUM(out) AS sum_out
+        FROM Outcome_o
+        WHERE date < '2001-04-15'
+        GROUP BY point) as table_out ON
+        table_inc.point = table_out.point)t

@@ -1,0 +1,12 @@
+//Task 45
+//Найдите названия всех кораблей в базе данных, состоящие из трех и более слов (например, King George V).
+//Считать, что слова в названиях разделяются единичными пробелами, и нет концевых пробелов.
+
+SELECT class_name
+FROM (
+    SELECT name AS class_name
+    FROM ships
+    UNION
+    SELECT ship AS class_name
+    FROM outcomes) t1
+WHERE class_name LIKE '% % %'

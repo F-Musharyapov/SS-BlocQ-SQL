@@ -1,0 +1,10 @@
+//Task 27
+//Найдите средний размер диска ПК каждого из тех производителей, которые выпускают и принтеры.
+//Вывести: maker, средний размер HD.
+
+SELECT maker, AVG(pc.hd)
+FROM PC INNER JOIN Product ON PC.model = Product.model
+WHERE maker IN (
+    SELECT DISTINCT maker FROM PRODUCT WHERE type = 'printer'
+)
+GROUP BY maker

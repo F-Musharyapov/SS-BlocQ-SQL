@@ -1,0 +1,13 @@
+//Task 37
+//Найдите классы, в которые входит только один корабль из базы данных (учесть также корабли в Outcomes).
+
+SELECT Classes.class
+FROM Classes LEFT JOIN (
+    SELECT class, name
+    FROM ships
+    UNION
+    SELECT ship, ship
+    FROM outcomes)
+    AS Table_ALL ON Table_ALL.class = Classes.class
+GROUP BY Classes.class
+HAVING COUNT(Table_ALL.class) = 1

@@ -1,0 +1,11 @@
+//Task 55
+//Для каждого класса определите год, когда был спущен на воду первый корабль этого класса.
+//Если год спуска на воду головного корабля неизвестен,
+//определите минимальный год спуска на воду кораблей этого класса.
+//Вывести: класс, год.
+
+SELECT Classes.class, year
+FROM Classes LEFT JOIN (
+    SELECT class, MIN(launched) AS year
+    FROM Ships
+    GROUP BY class) table1 ON Classes.class=table1.class

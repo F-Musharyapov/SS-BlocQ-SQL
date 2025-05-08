@@ -1,0 +1,12 @@
+//Task 49
+//Найдите названия кораблей с орудиями калибра 16 дюймов (учесть корабли из таблицы Outcomes).
+
+SELECT Outcomes.ship
+FROM Outcomes
+LEFT JOIN Classes ON Outcomes.ship = Classes.class
+WHERE bore = '16.0'
+UNION
+SELECT Ships.name
+FROM Ships
+LEFT JOIN Classes ON Ships.class = Classes.class
+WHERE bore = '16.0'

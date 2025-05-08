@@ -1,0 +1,19 @@
+//Task 26
+//Найдите среднюю цену ПК и ПК-блокнотов, выпущенных производителем A (латинская буква).
+//Вывести: одна общая средняя цена.
+
+
+SELECT AVG(price) AS Avg_price
+FROM (
+    SELECT PC.price
+   FROM PC
+   INNER JOIN Product ON PC.model = Product.model
+   WHERE Product.maker = 'A'
+
+   UNION ALL
+
+   SELECT Laptop.price
+   FROM Laptop
+   INNER JOIN Product ON Laptop.model = Product.model
+   WHERE Product.maker = 'A'
+)table1

@@ -1,0 +1,8 @@
+//Task 40
+//Найти производителей, которые выпускают более одной модели, при этом все выпускаемые производителем модели являются продуктами одного типа.
+//Вывести: maker, type
+
+SELECT maker, MAX(type) AS type_c
+FROM Product
+GROUP BY maker
+HAVING COUNT (model)> 1 AND MAX(type)=MIN(type)

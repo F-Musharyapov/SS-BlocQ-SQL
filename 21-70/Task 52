@@ -1,0 +1,22 @@
+//Task 52
+//Определить названия всех кораблей из таблицы Ships, которые могут быть линейным японским кораблем,
+//имеющим число главных орудий не менее девяти, калибр орудий менее 19 дюймов
+//и водоизмещение не более 65 тыс.тонн
+
+SELECT Outcomes.ship
+FROM Outcomes
+LEFT JOIN Classes ON Outcomes.ship = Classes.class
+WHERE country='Japan'
+    AND type='bb'
+    AND (numGuns >= 9 OR numGuns IS NULL)
+    AND (bore<19.0 OR bore IS NULL)
+    AND (displacement<=65000 OR displacement IS NULL)
+UNION
+SELECT Ships.name
+FROM Ships
+LEFT JOIN Classes ON Ships.class = Classes.class
+WHERE country='Japan'
+    AND type='bb'
+    AND (numGuns >= 9 OR numGuns IS NULL)
+    AND (bore<19.0 OR bore IS NULL)
+    AND (displacement<=65000 OR displacement IS NULL)

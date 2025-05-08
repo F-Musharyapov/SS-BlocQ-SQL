@@ -1,0 +1,27 @@
+//Task 24
+//Перечислите номера моделей любых типов,
+//имеющих самую высокую цену по всей имеющейся в базе данных продукции.
+
+SELECT model
+FROM (
+    SELECT model, price
+    FROM PC
+    UNION
+    SELECT model, price
+    FROM Laptop
+    UNION
+    SELECT model, price
+    FROM Printer
+    ) table1
+WHERE price =(
+    SELECT MAX(price)
+    FROM (
+        SELECT model, price
+        FROM PC
+        UNION
+        SELECT model, price
+        FROM Laptop
+        UNION
+        SELECT model, price
+        FROM Printer)
+    table1)
